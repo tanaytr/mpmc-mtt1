@@ -1,0 +1,173 @@
+[debug] [2026-03-15T14:21:26.630Z] ----------------------------------------------------------------------
+[debug] [2026-03-15T14:21:26.640Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2026-03-15T14:21:26.641Z] CLI Version:   15.3.0
+[debug] [2026-03-15T14:21:26.641Z] Platform:      win32
+[debug] [2026-03-15T14:21:26.641Z] Node Version:  v24.13.0
+[debug] [2026-03-15T14:21:26.641Z] Time:          Sun Mar 15 2026 19:51:26 GMT+0530 (India Standard Time)
+[debug] [2026-03-15T14:21:26.641Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-03-15T14:21:26.644Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\admin\Desktop\mpmc
+
+[debug] [2026-03-15T14:21:31.900Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2026-03-15T14:21:31.901Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2026-03-15T14:22:40.886Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-15T14:22:40.886Z] > authorizing via signed-in user (tanaytrivedi24@gmail.com)
+[debug] [2026-03-15T14:22:45.469Z] Checked if tokens are valid: false, expires at: 1773395451323
+[debug] [2026-03-15T14:22:45.469Z] Checked if tokens are valid: false, expires at: 1773395451323
+[debug] [2026-03-15T14:22:45.469Z] > refreshing access token with scopes: []
+[debug] [2026-03-15T14:22:45.470Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2026-03-15T14:22:45.471Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-15T14:22:45.713Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2026-03-15T14:22:45.713Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2026-03-15T14:22:45.723Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2026-03-15T14:22:45.723Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"mpmc-mtt1"}
+[debug] [2026-03-15T14:22:46.236Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 200
+[debug] [2026-03-15T14:22:46.236Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"projectIdStatus":"PROJECT_ID_AVAILABLE","suggestedProjectId":"mpmc-mtt1"}
+[debug] [2026-03-15T14:22:50.513Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:22:50.513Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:22:50.513Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2026-03-15T14:22:50.513Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"mpmc-mtt1","name":"MPMC MTT1 Marks"}
+[debug] [2026-03-15T14:22:53.269Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 200
+[debug] [2026-03-15T14:22:53.270Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"name":"operations/create_project.global.4908578599157595275"}
+[debug] [2026-03-15T14:22:53.271Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:22:53.271Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:22:53.271Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.4908578599157595275 [none]
+[debug] [2026-03-15T14:22:54.756Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.4908578599157595275 200
+[debug] [2026-03-15T14:22:54.756Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.4908578599157595275 {"name":"operations/create_project.global.4908578599157595275","metadata":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.ProjectCreationStatus","ready":true},"done":true,"error":{"code":8,"message":"The project cannot be created because you have exceeded your allotted project quota.","details":[{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"description":"The project cannot be created because you have exceeded your allotted project quota."}]}]}}
+[debug] [2026-03-15T14:22:54.760Z] FirebaseError: The project cannot be created because you have exceeded your allotted project quota.
+    at OperationPoller.poll (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\operation-poller.js:25:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async createCloudProject (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:237:29)
+    at async createFirebaseProjectAndLog (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:102:9)
+    at async Object.doSetup (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\features\project.js:64:24)
+    at async init (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:82:13)
+    at async Command.initAction [as actionFn] (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\init.js:226:5)
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.
+[debug] [2026-03-15T14:25:00.538Z] ----------------------------------------------------------------------
+[debug] [2026-03-15T14:25:00.547Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2026-03-15T14:25:00.548Z] CLI Version:   15.3.0
+[debug] [2026-03-15T14:25:00.549Z] Platform:      win32
+[debug] [2026-03-15T14:25:00.549Z] Node Version:  v24.13.0
+[debug] [2026-03-15T14:25:00.549Z] Time:          Sun Mar 15 2026 19:55:00 GMT+0530 (India Standard Time)
+[debug] [2026-03-15T14:25:00.549Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\admin\Desktop\mpmc
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2026-03-15T14:25:07.224Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-15T14:25:07.224Z] > authorizing via signed-in user (tanaytrivedi24@gmail.com)
+[debug] [2026-03-15T14:25:10.245Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:25:10.245Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:25:10.247Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2026-03-15T14:25:10.247Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"mpmc-mtt1"}
+[debug] [2026-03-15T14:25:13.034Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 200
+[debug] [2026-03-15T14:25:13.034Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"projectIdStatus":"PROJECT_ID_AVAILABLE","suggestedProjectId":"mpmc-mtt1"}
+[debug] [2026-03-15T14:25:18.174Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:25:18.174Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:25:18.174Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2026-03-15T14:25:18.174Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"mpmc-mtt1","name":"MPMC MTT1 Marks"}
+[debug] [2026-03-15T14:25:19.888Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 200
+[debug] [2026-03-15T14:25:19.888Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"name":"operations/create_project.global.4932002739887018248"}
+[debug] [2026-03-15T14:25:19.890Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:25:19.890Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:25:19.891Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.4932002739887018248 [none]
+[debug] [2026-03-15T14:25:21.362Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.4932002739887018248 200
+[debug] [2026-03-15T14:25:21.362Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.4932002739887018248 {"name":"operations/create_project.global.4932002739887018248","metadata":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.ProjectCreationStatus","ready":true},"done":true,"error":{"code":8,"message":"The project cannot be created because you have exceeded your allotted project quota.","details":[{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"description":"The project cannot be created because you have exceeded your allotted project quota."}]}]}}
+[debug] [2026-03-15T14:25:21.367Z] FirebaseError: The project cannot be created because you have exceeded your allotted project quota.
+    at OperationPoller.poll (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\operation-poller.js:25:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async createCloudProject (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:237:29)
+    at async createFirebaseProjectAndLog (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:102:9)
+    at async Object.doSetup (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\features\project.js:64:24)
+    at async init (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:82:13)
+    at async Command.initAction [as actionFn] (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\init.js:226:5)
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.
+[debug] [2026-03-15T14:25:52.570Z] ----------------------------------------------------------------------
+[debug] [2026-03-15T14:25:52.578Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2026-03-15T14:25:52.579Z] CLI Version:   15.3.0
+[debug] [2026-03-15T14:25:52.579Z] Platform:      win32
+[debug] [2026-03-15T14:25:52.579Z] Node Version:  v24.13.0
+[debug] [2026-03-15T14:25:52.579Z] Time:          Sun Mar 15 2026 19:55:52 GMT+0530 (India Standard Time)
+[debug] [2026-03-15T14:25:52.579Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\admin\Desktop\mpmc
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] 
+[info] i  If you want to create a project in a Google Cloud organization or folder, please use "firebase projects:create" instead, and return to this command when you've created the project. 
+[debug] [2026-03-15T14:25:59.758Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-03-15T14:25:59.759Z] > authorizing via signed-in user (tanaytrivedi24@gmail.com)
+[debug] [2026-03-15T14:26:04.808Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:26:04.808Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:26:04.811Z] >>> [apiv2][query] POST https://firebase.googleapis.com/v1/projects:checkProjectId [none]
+[debug] [2026-03-15T14:26:04.811Z] >>> [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"proposedId":"mpmc-mtt1"}
+[debug] [2026-03-15T14:26:05.852Z] <<< [apiv2][status] POST https://firebase.googleapis.com/v1/projects:checkProjectId 200
+[debug] [2026-03-15T14:26:05.853Z] <<< [apiv2][body] POST https://firebase.googleapis.com/v1/projects:checkProjectId {"projectIdStatus":"PROJECT_ID_AVAILABLE","suggestedProjectId":"mpmc-mtt1"}
+[debug] [2026-03-15T14:26:10.711Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:26:10.712Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:26:10.712Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects [none]
+[debug] [2026-03-15T14:26:10.712Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"projectId":"mpmc-mtt1","name":"MPMC MTT1 Marks"}
+[debug] [2026-03-15T14:26:12.463Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects 200
+[debug] [2026-03-15T14:26:12.463Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects {"name":"operations/create_project.global.5650411914956012471"}
+[debug] [2026-03-15T14:26:12.464Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:26:12.464Z] Checked if tokens are valid: true, expires at: 1773588164713
+[debug] [2026-03-15T14:26:12.465Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.5650411914956012471 [none]
+[debug] [2026-03-15T14:26:13.935Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.5650411914956012471 200
+[debug] [2026-03-15T14:26:13.936Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/operations/create_project.global.5650411914956012471 {"name":"operations/create_project.global.5650411914956012471","metadata":{"@type":"type.googleapis.com/google.cloudresourcemanager.v1.ProjectCreationStatus","ready":true},"done":true,"error":{"code":8,"message":"The project cannot be created because you have exceeded your allotted project quota.","details":[{"@type":"type.googleapis.com/google.rpc.QuotaFailure","violations":[{"description":"The project cannot be created because you have exceeded your allotted project quota."}]}]}}
+[debug] [2026-03-15T14:26:13.939Z] FirebaseError: The project cannot be created because you have exceeded your allotted project quota.
+    at OperationPoller.poll (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\operation-poller.js:25:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async createCloudProject (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:237:29)
+    at async createFirebaseProjectAndLog (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\management\projects.js:102:9)
+    at async Object.doSetup (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\features\project.js:64:24)
+    at async init (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\init\index.js:82:13)
+    at async Command.initAction [as actionFn] (C:\Users\admin\AppData\Roaming\npm\node_modules\firebase-tools\lib\commands\init.js:226:5)
+[error] 
+[error] Error: Failed to create project. See firebase-debug.log for more info.

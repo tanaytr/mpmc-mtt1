@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPMC MTT 1 | Space Command</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap');
+        
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-purple: #bc13fe;
+            --neon-pink: #ff0055;
+            --deep-space: #010208;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--deep-space);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            overflow: hidden;
+            perspective: 1200px;
+        }
+
+        /* Animated Nebula & Stars */
+        .space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(188, 19, 254, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(0, 242, 255, 0.1) 0%, transparent 40%),
+                var(--deep-space);
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: twinkle var(--duration) infinite ease-in-out;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; transform: scale(1) translateZ(0); }
+            50% { opacity: 1; transform: scale(1.3) translateZ(50px); }
+        }
+
+        /* Cyber HUD Card */
+        .hud-terminal {
+            background: rgba(8, 12, 24, 0.7);
+            backdrop-filter: blur(25px) saturate(180%);
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            border-radius: 30px;
+            position: relative;
+            box-shadow: 
+                0 0 50px rgba(0, 0, 0, 0.5),
+                0 0 20px rgba(0, 242, 255, 0.1),
+                inset 0 0 30px rgba(0, 242, 255, 0.02);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+        }
+
+        /* Decorative Corner Brackets */
+        .bracket {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--neon-blue);
+            opacity: 0.6;
+        }
+        .top-left { top: -2px; left: -2px; border-right: 0; border-bottom: 0; border-radius: 12px 0 0 0; }
+        .top-right { top: -2px; right: -2px; border-left: 0; border-bottom: 0; border-radius: 0 12px 0 0; }
+        .bottom-left { bottom: -2px; left: -2px; border-right: 0; border-top: 0; border-radius: 0 0 0 12px; }
+        .bottom-right { bottom: -2px; right: -2px; border-left: 0; border-top: 0; border-radius: 0 0 12px 0; }
+
+        /* Responsive Layouts */
+        @media (orientation: portrait) {
+            .container-box {
+                width: 92vw;
+                padding: 2rem 1.5rem;
+            }
+            .glitch-title { font-size: 2rem; }
+        }
+
+        @media (orientation: landscape) {
+            .container-box {
+                width: 600px;
+                padding: 4rem;
+            }
+            .glitch-title { font-size: 3rem; }
+        }
+
+        .orbitron { font-family: 'Orbitron', sans-serif; }
+
+        /* High-Tech Buttons */
+        .btn-command {
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-weight: 700;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
+        }
+
+        .btn-command:hover:not(:disabled) {
+            background: var(--neon-blue);
+            color: var(--deep-space);
+            box-shadow: 0 0 30px var(--neon-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-command:disabled {
+            border-color: #1e293b;
+            color: #475569;
+            cursor: not-allowed;
+            background: rgba(30, 41, 59, 0.2);
+        }
+
+        /* Digital Inputs */
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .input-field {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(0, 242, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            width: 100%;
+            outline: none;
+            transition: all 0.3s;
+            text-align: center;
+            letter-spacing: 5px;
+        }
+
+        .input-field:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Scanning Overlay */
+        .scan-line {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 4px;
+            background: linear-gradient(to bottom, transparent, var(--neon-blue), transparent);
+            opacity: 0.1;
+            pointer-events: none;
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
+
+        .hidden-step { display: none; }
+        
+        .fade-step {
+            animation: stepIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        @keyframes stepIn {
+            from { opacity: 0; transform: translateZ(-200px) rotateX(10deg); }
+            to { opacity: 1; transform: translateZ(0) rotateX(0); }
+        }
+
+        /* Result Ring */
+        .marks-ring {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid rgba(0, 242, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
+            position: relative;
+            background: radial-gradient(circle, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+        }
+
+        .marks-ring::before {
+            content: '';
+            position: absolute;
+            width: 110%; height: 110%;
+            border-radius: 50%;
+            border: 1px dashed var(--neon-blue);
+            opacity: 0.3;
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+    </style>
+</head>
+<body>
+
+    <div class="space-bg" id="space-bg"></div>
+    <div class="scan-line"></div>
+
+    <div id="app" class="container-box hud-terminal text-center">
+        <!-- Structural Brackets -->
+        <div class="bracket top-left"></div>
+        <div class="bracket top-right"></div>
+        <div class="bracket bottom-left"></div>
+        <div class="bracket bottom-right"></div>
+        
+        <!-- Step 1: Deep Space Landing -->
+        <div id="step-1" class="fade-step">
+            <div class="flex justify-center mb-6">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-cyan-400">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+                </svg>
+            </div>
+            <div class="mb-4 text-[10px] uppercase tracking-[0.8em] text-cyan-400 font-bold opacity-60">MTT-1 MARKS</div>
+            <h1 class="orbitron font-black mb-6 glitch-title tracking-[0.1em] text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">
+                MPMC
+            </h1>
+            <div class="h-px w-32 bg-gradient-to-r from-transparent via-cyan-500 to-transparent mx-auto mb-10"></div>
+            <p class="text-slate-400 mb-12 tracking-[0.2em] text-xs font-medium" id="status-text">
+                WAITING FOR SATELLITE LINK...
+            </p>
+            <button onclick="navigate(2)" id="enter-btn" disabled class="btn-command w-full py-5 rounded-lg text-sm">
+                Initiate Uplink
+            </button>
+        </div>
+
+        <!-- Step 2: Identification -->
+        <div id="step-2" class="hidden-step">
+            <div class="flex justify-between items-center mb-12">
+                <button onclick="navigate(1)" class="orbitron text-[10px] tracking-widest text-cyan-500 hover:text-white transition bg-cyan-500/10 px-4 py-2 rounded-full border border-cyan-500/20">
+                    &lt; ESCAPE_LINK
+                </button>
+                <div class="text-[10px] text-slate-500 orbitron">AUTH_REQUIRED</div>
+            </div>
+            
+            <h2 class="orbitron text-xl font-bold mb-10 text-center text-white/90 tracking-widest">ENTER SAP-ID</h2>
+            
+            <div class="space-y-10 text-left">
+                <div class="input-wrapper">
+                    <div class="flex justify-between mb-2">
+                        <label class="text-[10px] uppercase tracking-[0.3em] text-cyan-400">SAP_IDENTIFIER</label>
+                        <span class="text-[10px] text-slate-600">REQ_9_DIGITS</span>
+                    </div>
+                    <input type="text" id="sapInput" maxlength="11" autocomplete="off"
+                           class="input-field orbitron" placeholder="000000000">
+                </div>
+
+                <div id="nameFieldContainer" class="hidden-step fade-step p-6 rounded-xl bg-gradient-to-br from-cyan-500/10 to-blue-500/5 border border-cyan-500/30">
+                    <label class="block text-[9px] uppercase tracking-[0.4em] text-cyan-400 mb-2">Identity Validated</label>
+                    <input type="text" id="nameDisplay" readonly 
+                           class="bg-transparent w-full text-2xl font-black orbitron text-white outline-none cursor-default">
+                    <div class="mt-2 h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                        <div class="h-full bg-cyan-400 animate-[loading_2s_ease-in-out_infinite]" style="width: 30%;"></div>
+                    </div>
+                </div>
+
+                <div id="errorMsg" class="hidden-step text-red-500 text-[10px] tracking-widest orbitron text-center bg-red-500/10 py-3 rounded-lg border border-red-500/20">
+                    ERROR: SUBJECT_NOT_FOUND_IN_COUNCILS
+                </div>
+
+                <button id="marksBtn" disabled onclick="navigate(3)" 
+                        class="btn-command w-full py-5 rounded-lg text-sm mt-6">
+                    Get Scorecard
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3: Enriched Result -->
+        <div id="step-3" class="hidden-step">
+            <div class="mb-10 text-left">
+                <button onclick="navigate(2)" class="orbitron text-[10px] tracking-widest text-cyan-500 hover:text-white transition">
+                    &lt; RETURN_TO_DECK
+                </button>
+            </div>
+            
+            <div class="relative py-6">
+                <h3 id="resultName" class="orbitron text-3xl font-black text-white mb-1 tracking-tighter">STUDENT_NAME</h3>
+                <div class="text-cyan-500/60 text-[10px] tracking-[0.5em] font-bold uppercase mb-8">Official Record Verified</div>
+                
+                <div class="marks-ring">
+                    <div class="text-center">
+                        <span class="block text-6xl font-black orbitron text-white" id="resultMarks">00</span>
+                        <span class="text-[10px] text-slate-500 orbitron uppercase tracking-[0.2em]">Credits / 10</span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mt-12">
+                    <div class="p-3 bg-white/5 rounded-lg border border-white/10">
+                        <div class="text-[9px] text-slate-500 uppercase">Status</div>
+                        <div class="text-xs text-green-400 font-bold">SUCCESSFUL</div>
+                    </div>
+                    <div class="p-3 bg-white/5 rounded-lg border border-white/10">
+                        <div class="text-[9px] text-slate-500 uppercase">Sector</div>
+                        <div class="text-xs text-cyan-400 font-bold">MTT 1</div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="navigate(1)" class="w-full mt-12 py-4 text-[10px] tracking-[0.4em] text-slate-500 hover:text-red-400 hover:border-red-500/30 transition border border-white/5 rounded-lg uppercase">
+                Purge Session
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        // Immersive Starfield
+        const container = document.getElementById('space-bg');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2 + 0.5;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.setProperty('--duration', `${Math.random() * 4 + 2}s`);
+            container.appendChild(star);
+        }
+
+        // Logic
+        let studentDatabase = {};
+        let currentStudent = null;
+
+        const statusText = document.getElementById('status-text');
+        const enterBtn = document.getElementById('enter-btn');
+        const sapInput = document.getElementById('sapInput');
+        const nameFieldContainer = document.getElementById('nameFieldContainer');
+        const nameDisplay = document.getElementById('nameDisplay');
+        const marksBtn = document.getElementById('marksBtn');
+        const errorMsg = document.getElementById('errorMsg');
+
+        async function loadData(retries = 5, delay = 1000) {
+            try {
+                // Fetch logic for data.txt
+                const response = await fetch('data.txt');
+                if (!response.ok) throw new Error('DB Link Error');
+                
+                const text = await response.text();
+                parseData(text);
+                
+                statusText.innerText = "ENTER";
+                enterBtn.disabled = false;
+                enterBtn.innerText = "Enter Terminal";
+            } catch (error) {
+                if (retries > 0) {
+                    setTimeout(() => loadData(retries - 1, delay * 2), delay);
+                } else {
+                    statusText.innerText = "SYSTEM OFFLINE. CONTACT COMMAND.";
+                    statusText.classList.add('text-red-500');
+                }
+            }
+        }
+
+        function parseData(text) {
+            const lines = text.trim().split('\n');
+            lines.forEach(line => {
+                if (line.includes('|')) {
+                    const [sap, name, marks] = line.split('|').map(s => s.trim());
+                    if (sap && name && marks) studentDatabase[sap] = { name, marks };
+                }
+            });
+        }
+
+        window.addEventListener('load', () => loadData());
+
+        sapInput.addEventListener('input', (e) => {
+            const val = e.target.value.trim();
+            if (studentDatabase[val]) {
+                currentStudent = studentDatabase[val];
+                nameDisplay.value = currentStudent.name.toUpperCase();
+                nameFieldContainer.classList.remove('hidden-step');
+                marksBtn.disabled = false;
+                errorMsg.classList.add('hidden-step');
+            } else {
+                currentStudent = null;
+                nameFieldContainer.classList.add('hidden-step');
+                marksBtn.disabled = true;
+                if (val.length >= 9) errorMsg.classList.remove('hidden-step');
+                else errorMsg.classList.add('hidden-step');
+            }
+        });
+
+        function navigate(step) {
+            document.querySelectorAll('#app > div').forEach(div => {
+                if(div.id.startsWith('step-')) div.classList.add('hidden-step');
+            });
+            const target = document.getElementById(`step-${step}`);
+            target.classList.remove('hidden-step');
+            target.classList.add('fade-step');
+
+            if (step === 3 && currentStudent) {
+                document.getElementById('resultName').innerText = currentStudent.name.toUpperCase();
+                document.getElementById('resultMarks').innerText = currentStudent.marks;
+            }
+
+            if (step === 1) {
+                sapInput.value = '';
+                nameFieldContainer.classList.add('hidden-step');
+                marksBtn.disabled = true;
+                errorMsg.classList.add('hidden-step');
+            }
+        }
+
+        // Mouse tilt effect for the HUD
+        document.addEventListener('mousemove', (e) => {
+            const hud = document.querySelector('.hud-terminal');
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            hud.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
+        });
+    </script>
+</body>
+</html>
